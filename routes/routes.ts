@@ -6,10 +6,11 @@ import {
 const router = express.Router();
 
 router.get("/current-weather", async (req, res) => {
-  const location: string = req.query.location as string;
+  const lat: string = req.query.lat as string;
+  const lon: string = req.query.lon as string;
   const units: string = req.query.units as string;
-  if (location) {
-    const data = await getCurrentWeather(location, units);
+  if (lat && lon) {
+    const data = await getCurrentWeather(lat, lon, units);
     res.json(data);
   } else {
     console.log("No location provided");
@@ -20,10 +21,11 @@ router.get("/current-weather", async (req, res) => {
 });
 
 router.get("/forecast", async (req, res) => {
-  const location: string = req.query.location as string;
+  const lat: string = req.query.lat as string;
+  const lon: string = req.query.lon as string;
   const units: string = req.query.units as string;
-  if (location) {
-    const data = await getWeatherForecast(location, units);
+  if (lat && lon) {
+    const data = await getWeatherForecast(lat, lon, units);
     res.json(data);
   } else {
     console.log("No location provided");
